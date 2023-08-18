@@ -35,7 +35,7 @@ class CategoriesController extends Controller
      public function store(Request $request)
      {
         $request->validate([
-            'name' => 'required|min:1|max:50|unique:categories,name'
+            'new_name' => 'required|min:1|max:50|unique:categories,name'
         ]);
 
         $this->category->name = ucwords(strtolower($request->name));
@@ -46,7 +46,7 @@ class CategoriesController extends Controller
 
      public function update(Request $request, $id){
         $request->validate([
-            'new_name'    => 'required|min:1|max:50',
+            'new_name'    => 'required|min:1|max:50|unique:categories,name' . $id
     
         ]);
 
