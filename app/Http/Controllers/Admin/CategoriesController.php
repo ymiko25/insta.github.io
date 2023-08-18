@@ -46,7 +46,7 @@ class CategoriesController extends Controller
 
      public function update(Request $request, $id){
         $request->validate([
-            'new_name'    => 'required|min:1|max:50|unique:categories,name' . $id
+            'new_name'    => 'required|min:1|max:50|unique:categories,name,' . $id
     
         ]);
 
