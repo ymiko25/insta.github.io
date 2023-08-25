@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Explore People')
+@section('title', 'Explore People or Post')
 
 @section('content')
     <div class="row justify-content-center">
@@ -45,7 +45,18 @@
           @empty
              <p class="lead text-muted text-center">No users found.</p>
           @endforelse
-       </div>
-
+        </div>
     </div>
+          <div class="row">
+          @forelse ($description as $post)
+                  
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <a href="{{ route('post.show', $post->id) }}">
+                            <img src="{{ $post->image }}" alt="post id {{ $post->id }}" class="grid-img">
+                        </a>
+                    </div>
+          @empty
+            <p class="lead text-muted text-center">No Posts found.</p>f
+          @endforelse
+          </div>
 @endsection

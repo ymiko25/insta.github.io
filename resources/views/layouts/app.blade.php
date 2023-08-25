@@ -116,10 +116,10 @@
                                <a href="{{ route('admin.users') }}" class="list-group-item {{request()->is('admin/users') ? 'active' : ''}}">
                                   <i class="fa-solid fa-users"></i> Users
                                </a>
-                               <a href="{{ route('admin.posts') }}" class="list-group-item {{request()->is('admin/posts') ? 'active' : ''}}">
+                               <a href="{{ route('admin.posts') }}" class="list-group-item {{request()->is('admin/post') ? 'active' : ''}}">
                                   <i class="fa-solid fa-newspaper"></i> Posts
                                </a>
-                               <a href="{{ route('admin.categories') }}" class="list-group-item {{request()->is('admin/categories') ? 'active' : ''}}">
+                               <a href="{{ route('admin.categories') }}" class="list-group-item {{request()->is('admin/category') ? 'active' : ''}}">
                                   <i class="fa-solid fa-tags"></i> Categories
                                </a>
                           </div>

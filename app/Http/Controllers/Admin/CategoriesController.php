@@ -11,10 +11,12 @@ class CategoriesController extends Controller
 {
      private $category;
      private $post;
+     private $categories;
 
      public function __construct(Category $category, Post $post){
         $this->category = $category;
         $this->post = $post;
+        $this->categories = $category;
      }
 
      public function index(){
@@ -35,7 +37,7 @@ class CategoriesController extends Controller
      public function store(Request $request)
      {
         $request->validate([
-            'new_name' => 'required|min:1|max:50|unique:categories,name'
+            'name' => 'required|min:1|max:50|unique:categories,name'
         ]);
 
         $this->category->name = ucwords(strtolower($request->name));
@@ -51,12 +53,19 @@ class CategoriesController extends Controller
         ]);
 
         $category = $this->category->findOrFail($id);
-        $category->name = ucwords((strtolower($request->name)));
+        $category->name = ucwords((strtolower($request->new_name)));
         $category->save();
 
         return redirect()->back();
 
         }
+
+     public function destroy($id){
+        $category = $this->categories->findOrFail($id);
+        $category->delete();
+
+         return redirect()->back();
+     }
 }
 
 

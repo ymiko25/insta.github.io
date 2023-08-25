@@ -51,6 +51,19 @@
                       </div>
 
                       <div class="mb-3">
+                          <label for="password" class="form-label fw-bold">Password</label>
+                          <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required autocomplete="new-password">
+                          {{-- error --}}
+                          @error('password')
+                          <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                            <label for="password-confirm" class="form-label fw-bold">Confirm Password</label>
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                      </div>
+
+                      <div class="mb-3">
                           <label for="introduction" class="form-label fw-bold">Introduction</label>
                           <textarea type="introduction" name="introduction" id="introduction" row="5" class="form-control" placeholder="Describe yourself">{{old('introduction', $user->introduction)}}</textarea>
                           {{-- error --}}
@@ -58,9 +71,6 @@
                           <div class="text-danger small">{{ $message }}</div>
                           @enderror
                       </div>
-                      
-
-
                 </div>
                 <button type="submit" class="btn btn-warning px-5">Save</button>
             </form>

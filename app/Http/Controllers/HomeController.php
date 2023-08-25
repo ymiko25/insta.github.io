@@ -40,7 +40,8 @@ class HomeController extends Controller
     }
 
     // get the posts of the users that the Auth user is following
-    public function getHomePosts(){
+    public function getHomePosts()
+    {
         $all_posts = $this->post->latest()->get();
         $home_posts = []; // in case of $home_post is empty, it will not return NULL but empty instead.
 
@@ -53,7 +54,8 @@ class HomeController extends Controller
         return $home_posts;
     }
 
-    private function getSuggestedUsers(){
+    private function getSuggestedUsers()
+    {
         $all_users = $this->user->all()->except(Auth::user()->id);
         $suggested_users = [];
 
@@ -73,6 +75,7 @@ class HomeController extends Controller
     public function search(Request $request)
     {
         $users = $this->user->where('name', 'like', '%' . $request->search. '%')->get();
-        return view('users.search')->with('users',$users)->with('search', $request->search);
+        $posts = $this->post->where('description', 'like', '%' . $request->search. '%')->get();
+        return view('users.search')->with('users',$users)->with('description', $posts)->with('search', $request->search);
     }
 }

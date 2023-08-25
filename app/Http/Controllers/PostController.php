@@ -29,7 +29,7 @@ class PostController extends Controller
     public function store(Request $request){
         // Validate all the form data
         $request->validate([
-            'category' => 'required|array|between:1,3',
+            'category' => 'nullable|array|between:1,3',
             'description' => 'required|min:1|max:1000',
             'image' => 'required|mimes:jpeg,jpg,png,gif|max:1048'
         ]);
@@ -42,11 +42,16 @@ class PostController extends Controller
         $this->post->save();
 
         // save the categories to the category_post table
-        foreach($request->category as $category_id){
-            $category_post[] = ['category_id' => $category_id];
-        }
+        if ($request->has('category')) {
+            $category_post = [];
+    
+            foreach($request->category as $category_id){
+                $category_post[] = ['category_id' => $category_id];
+            }
 
-        $this->post->categoryPost()->createMany($category_post);  // createMany() accepts 2D array
+        $this->post->categoryPost()->createMany($category_post);
+        }
+        // createMany() accepts 2D array
         // Given
         // $this->post->id = 2
         //$request->category = [1,4];

@@ -42,9 +42,13 @@
                            <button type="submit" class="btn btn-outline-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#edit-category-{{$category->id}}" title="Edit">
                              <i class="fa-solid fa-pen"></i>
                            </button>
-                           <button type="submit" class="btn btn-outline-danger btn-sm me-2" data-bs-toggle="modal" data-bs-target="#delete-category-{{$category->id}}" title="Delete">
-                             <i class="fa-solid fa-trash-can"></i>
-                           </button>                     
+                           <form action="{{ route('admin.categories.destroy', $category->id)}}" method="post">
+                               @csrf
+                               @method('DELETE')
+                               <button type="submit" class="btn btn-outline-danger btn-sm me-2" data-bs-toggle="modal" data-bs-target="#delete-category-{{$category->id}}" title="Delete">
+                                  <i class="fa-solid fa-trash-can"></i>
+                               </button>
+                           </form>
                 </td>
             </tr>
             @include('admin.categories.modal.action')
